@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>意见反馈 · 光影录</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23f2b33d'/><text x='16' y='23' font-size='19' text-anchor='middle' fill='%2317130a' font-family='sans-serif' font-weight='bold'>影</text></svg>">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main>
+  <h1 class="page-title">意见反馈</h1>
+  <p class="page-sub">遇到问题、想要功能、或者想求某部片子的资源，都可以在这里告诉我们</p>
+
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start" id="fbWrap">
+    <div class="card-box">
+      <h3>提交反馈</h3>
+      <label class="field"><span>反馈类型</span>
+        <select id="fbType">
+          <option value="suggestion">功能建议</option>
+          <option value="bug">问题反馈</option>
+          <option value="resource">资源求助</option>
+          <option value="content">内容纠错</option>
+          <option value="other">其他</option>
+        </select>
+      </label>
+      <label class="field"><span>详细描述</span>
+        <textarea id="fbContent" maxlength="3000" placeholder="请尽量写清楚：如果是资源求助，请写明影片全名；如果是问题反馈，请描述复现步骤。"></textarea>
+      </label>
+      <label class="field"><span>联系方式（可选，方便站长回复你时联络）</span>
+        <input type="text" id="fbContact" maxlength="120" placeholder="微信号 / QQ / 邮箱等，不愿留空即可">
+      </label>
+      <div class="err" id="fbErr"></div>
+      <button class="btn primary" id="fbSubmit">提交反馈</button>
+      <p class="hint">提示：资源求助请写明影片全名与清晰度要求，站长看到后会补发网盘链接。</p>
+    </div>
+
+    <div>
+      <div class="card-box">
+        <h3>我的反馈记录</h3>
+        <div id="mineBox" class="hint">加载中…</div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="/js/app.js"></script>
+<script src="/js/feedback.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+# 影视推荐站点 systemd 单元文件
+# 安装位置：/etc/systemd/system/movie-site.service
+[Unit]
+Description=Cine Recommend - Movie Recommendation Site
+Documentation=https://example.com
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=cine
+Group=cine
+WorkingDirectory=/opt/movie-site
+
+# 环境变量单独存放，避免把密码写进单元文件
+EnvironmentFile=/opt/movie-site/deploy/movie-site.env
+Environment=NODE_ENV=production
+Environment=NODE_OPTIONS=--no-warnings
+
+ExecStart=/usr/bin/node server/index.js
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGTERM
+KillMode=mixed
+TimeoutStopSec=15
+Restart=always
+RestartSec=5
+StartLimitIntervalSec=120
+StartLimitBurst=10
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=movie-site
+
+# 安全加固
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+# ProtectSystem=strict 下需要显式放开可写目录
+ReadWritePaths=/opt/movie-site/data
+ProtectProc=invisible
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+MemoryMax=512M
+TasksMax=128
+
+[Install]
+WantedBy=multi-user.target
